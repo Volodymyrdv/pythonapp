@@ -25,5 +25,5 @@ jobs:
     steps:
     - run: echo "Job was triggered by event ${{ github.event_name }}"
     - run: echo "This job is executed on a runner with os ${{ runner.os }}"
-    - run: echo "Name of the branch ${{ github.ref }} and repository ${{ github..repository }}"
+    - run: echo "Name of the branch ${{ github.ref }} and repository ${{ github.repository }}"
     - run: echo "This job's status is ${{ job.status }}"
