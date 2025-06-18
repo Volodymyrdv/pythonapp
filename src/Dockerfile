@@ -10,7 +10,6 @@ COPY app.py docker-logo.png requirements.txt ./
 # Install Flask and other dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
-
 # Expose port 8080 to the host
 EXPOSE 8080
 
