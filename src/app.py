@@ -39,18 +39,10 @@ def hello():
     counter = Counter.query.first()
     counter.value += 1
     db.session.commit()
-    return f'''
+    return f"""
     Docker is Awesome! My ENV var is: {app_env}<br>
-    Page reload count: {counter.value}<br>
-<pre>                   ##        .</pre>
-<pre>             ## ## ##       ==</pre>
-<pre>          ## ## ## ##      ===</pre>
-<pre>      /""""""""""""""""\\___/ ===</pre>
-<pre> ~~~ (~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===-- ~~~</pre>
-<pre>      \\______ o          __/</pre>
-<pre>        \    \        __/</pre>
-<pre>         \\____\\______/</pre>
-    '''
+    Page reload count: {counter.value}
+"""
 
 
 @app.route("/logo")
