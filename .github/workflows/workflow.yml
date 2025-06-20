@@ -65,7 +65,8 @@ jobs:
   build-image:
     name: Build and Push Image
     needs: 'python-ci'
-    if: github.ref_name == 'main'
+    if: github.ref_name == 'hello'
+    # change it
     runs-on: ubuntu-latest
 
     steps:
