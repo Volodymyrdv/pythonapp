@@ -13,7 +13,7 @@ mysql:
 kube2py:
   image:
     name: kube2py
-    repository: volodymyrdv/mate2py
+    repository: volodymyrdv/kube2py
     version: 2.0.0
 
   configs:
