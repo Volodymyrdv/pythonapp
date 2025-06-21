@@ -66,7 +66,6 @@ jobs:
     name: Build and Push Image
     needs: 'python-ci'
     if: github.ref_name == 'hello'
-    # change it
     runs-on: ubuntu-latest
 
     steps:
@@ -113,3 +112,16 @@ jobs:
         with:
           name: helm-package
           path: ./*.tgz
+
+  deploy-helm:
+    name: Deploy Helm
+    needs: ['build-image', 'helm-ci']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Helm artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: helm-package
+          path: .
+      - name: Setup Helm
+        uses: azure/setup-helm@v4.2.0
