@@ -1,8 +1,6 @@
-common:
-  namespace: mateapp
-
 global:
   ENVIRONMENT: "Development"
+  namespace: mateapp
 
 mysql:
   configs:
