@@ -114,7 +114,7 @@ jobs:
           path: ./*.tgz
 
   deploy-helm-dev:
-    name: Deploy helm
+    name: Deploy helm(ye)
     uses: ./.github/workflows/deployment-workflow.yml
     needs: ['build-image', 'helm-ci']
     secrets: inherit
