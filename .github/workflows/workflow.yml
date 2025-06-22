@@ -121,3 +121,14 @@ jobs:
     with:
       environment: development
       version: ${{github.sha}}
+
+  deploy-helm-staging:
+    name: Deploy helm(ye)
+    uses: ./.github/workflows/deployment-workflow.yml
+    needs: deploy-helm-dev
+    secrets: inherit
+    with:
+      environment: staging
+      version: ${{github.sha}}
+      helm-values-path: ./kube2py/values/staging.yaml
+      helm-release-name: kube2py-staging
