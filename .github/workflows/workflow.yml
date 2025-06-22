@@ -124,6 +124,13 @@ jobs:
         with:
           name: helm-package
           path: .
+
+      - name: Download Helm artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: helm-artifacts
+          path: .
+
       - name: Setup Helm
         uses: azure/setup-helm@v4.2.0
 
@@ -140,3 +147,23 @@ jobs:
         with:
           resource-group: ${{vars.AZURE_RESOURCE_GROUP}}
           cluster-name: ${{vars.AZURE_CLUSTER_NAME}}
+
+      - name: Deploy helm to Development
+        run: |
+          helm upgrade --install --atomic --wait --timeout 3600s --debug kube2py ./kube2py-*.tgz \
+            -f ./kube2py/values.yaml \
+            --set mysql.configs.secrets.MYSQL_ROOT_PASSWORD="${{secrets.MYSQL_ROOT_PASSWORD}}" \
+            --set mysql.configs.secrets.MYSQL_USER="${{secrets.MYSQL_USER}}" \
+            --set mysql.configs.secrets.MYSQL_PASSWORD="${{secrets.MYSQL_PASSWORD}}" \
+            --set kube2py.secrets.password="${{secrets.KUBE2PY_PASSWORD}}" \
+            --set kube2py.secrets.login="${{secrets.KUBE2PY_LOGIN}}" \
+            --set kube2py.secrets.DB_CONNECTION="${{secrets.DB_CONNECTION}}" \
+            --set kube2py.image.version="${{github.sha}}"
+
+# MYSQL_ROOT_PASSWORD: "1234"
+# MYSQL_USER: "app_user"
+# MYSQL_PASSWORD: "1234"
+# password: MyStrongPassword
+# login: SuperUser
+# external_endpoint: http://httpbin-api.mateapp.svc.cluster.local
+# DB_CONNECTION: mysql+mysqlconnector://app_user:1234@mysql-0.mysql.mysql.svc.cluster.local/app_db
