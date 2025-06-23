@@ -99,7 +99,7 @@ jobs:
         with:
           name: helm-artifacts
           path: .
-          
+
       - name: Setup Helm
         uses: azure/setup-helm@v4.2.0
       - name: Lint helm
